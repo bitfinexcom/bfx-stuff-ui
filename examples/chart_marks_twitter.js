@@ -89,8 +89,6 @@ function run (wss, conf, keyword) {
   })
 
   stream.on('tweet', tweet => {
-    console.log(tweet)
-
     const data = getTweetInfo(tweet, true)
     if (!data) {
       return
