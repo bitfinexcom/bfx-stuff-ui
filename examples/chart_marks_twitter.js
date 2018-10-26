@@ -5,7 +5,7 @@ const Sentiment = require('sentiment')
 const uiLib = require('./../lib-ui.js')
 
 const THRES_RETWEETS = 25
-const THRES_FOLLOWERS = 500
+const THRES_FOLLOWERS = 5000
 let USERS = ['paoloardoino', 'bitfinex', 'iamnomad', 'flibbr', 'alistairmilne', 'ZeusZissou', 'adam3us', 'VitalikButerin', 'EOS_io', 'Tether_to', 'ethfinex', 'eosfinexproject', 'aantonop', 'coindesk', 'cointelegraph', 'loomdart']
 
 let MID = 0
