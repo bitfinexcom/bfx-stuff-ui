@@ -1,0 +1,13 @@
+{
+  "apiKey": "",
+  "apiSecret": "",
+
+  "_NOTE: Twitter configuration required only for Twitter related examples ;)": null,
+  "twitterKey": "",
+  "twitterSecret": "",
+  "twitterAccessToken": "",
+  "twitterAccessSecret": "",
+
+  "_NOTE: Telegram configuration required only for Telegram related examples ;)": null,
+  "tgKey": ""
+}
