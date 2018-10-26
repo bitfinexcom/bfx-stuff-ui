@@ -45,10 +45,6 @@ wss.on('message', function (data) {
       process.exit(-1)
     }
   }
-
-  setInterval(() => {
-    wss.send(JSON.stringify({ event: 'ping' }))
-  }, 15000)
 })
 
 wss.on('open', function () {
@@ -59,6 +55,10 @@ wss.on('open', function () {
     authPayload: payload,
     authNonce: +authNonce
   }))
+
+  setInterval(() => {
+    wss.send(JSON.stringify({ event: 'ping' }))
+  }, 15000)
 
   setTimeout(() => {
     script.run(wss, conf, process.argv[3])
