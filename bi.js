@@ -64,3 +64,8 @@ wss.on('open', function () {
     script.run(wss, conf, process.argv[3])
   }, 2000)
 })
+
+wss.on('close', function () {
+  console.error('SOCKET CLOSED')
+  process.exit(-1)
+})
