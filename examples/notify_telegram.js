@@ -1,14 +1,14 @@
 const Telegraf = require('telegraf')
 const uiLib = require('./../lib-ui.js')
 
-function run(wss, conf) {
+function run (wss, conf) {
   const bot = new Telegraf(conf.tgKey)
 
   bot.start((ctx) => {
-  
+
   })
 
-  bot.help((ctx) => ctx.reply("notify lorem ipsum... : sends a notification to your bitfinex UI"))
+  bot.help((ctx) => ctx.reply('notify lorem ipsum... : sends a notification to your bitfinex UI'))
 
   bot.command('notify', (ctx) => {
     if (ctx.update && ctx.update.message) {
@@ -21,13 +21,13 @@ function run(wss, conf) {
         null,
         `TG(from=${msg.from.username}): ${text}`,
         {
-          tone: 'pingUp',
-        } 
+          tone: 'pingUp'
+        }
       )
     }
   })
 
-  bot.startPolling()  
+  bot.startPolling()
 }
 
 module.exports = {

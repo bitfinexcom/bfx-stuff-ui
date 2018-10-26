@@ -1,17 +1,17 @@
 const async = require('async')
 const Twit = require('twit')
-const Sentiment = require('sentiment');
+const Sentiment = require('sentiment')
 
 const uiLib = require('./../lib-ui.js')
 
 const THRES_RETWEETS = 25
-let USERS = ['paoloardoino', 'bitfinex', 'iamnomad', 'flibbr', 'alistairmilne', 'ZeusZissou', 'adam3us', 'VitalikButerin', 'EOS_io', 'Tether_to', 'ethfinex', 'eosfinexproject', 'aantonop', 'coindesk', 'cointelegraph']
+let USERS = ['paoloardoino', 'bitfinex', 'iamnomad', 'flibbr', 'alistairmilne', 'ZeusZissou', 'adam3us', 'VitalikButerin', 'EOS_io', 'Tether_to', 'ethfinex', 'eosfinexproject', 'aantonop', 'coindesk', 'cointelegraph', 'loomdart']
 
 let MID = 0
 const sentiment = new Sentiment()
 
 function getTweetInfo (tweet, is_stream = false) {
-  if (tweet.retweet_count < THRES_RETWEETS) {
+  if (!is_stream && tweet.retweet_count < THRES_RETWEETS) {
     return
   }
 
@@ -27,7 +27,7 @@ function getTweetInfo (tweet, is_stream = false) {
   return {
     id: 'mark_' + MID++,
     ts: (new Date(tweet.created_at)).getTime(),
-    //symbol: 'tBTCUSD',
+    // symbol: 'tBTCUSD',
     content: `<img src="${tweet.user.profile_image_url_https}" /><br />${tweet.text}`,
     color_bg: color_bg,
     color_text: '#FFFFFF',
@@ -67,7 +67,7 @@ function run (wss, conf, keyword) {
           }
 
           uiLib.addMark(
-            wss, data 
+            wss, data
           )
 
           return true
@@ -89,23 +89,25 @@ function run (wss, conf, keyword) {
   })
 
   stream.on('tweet', tweet => {
+    console.log(tweet)
+
     const data = getTweetInfo(tweet, true)
     if (!data) {
       return
     }
 
     uiLib.addMark(
-      wss, getTweetInfo(tweet)
+      wss, data
     )
 
     uiLib.sendNotification(
-      wss, 
+      wss,
       tweet.user.profile_image_url_https,
       `https://twitter.com/${tweet.user.screen_name}/${tweet.id}`,
       tweet.text,
       {
-        tone: 'pingUp',
-      } 
+        tone: 'pingUp'
+      }
     )
   })
 }
