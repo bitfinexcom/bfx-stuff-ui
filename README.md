@@ -21,14 +21,14 @@ cp config.json.example config.json
 
 * Shows a simple notification in your Bitfinex UI.
 ```
-node bi.json notify_basic
+node bi.js notify_basic
 ```
 
 * Adds 5 chart markers in your Bitfinex UI chart
 Note: make sure to use the 5m (or 15m) timeframe and zoom towards current time
 
 ```
-node bi.json chart_marks_basic
+node bi.js chart_marks_basic
 ```
 
 
@@ -36,7 +36,7 @@ node bi.json chart_marks_basic
 
 Subscribes to a list of Twitter influencers, performs basic sentiment analysis and adds the relative markers to the Bitfinex UI chart.
 ```
-node bi.json chart_marks_twitter
+node bi.js chart_marks_twitter
 ```
 
 #### TELEGRAM BOT AND CHART MARKERS 
@@ -45,5 +45,5 @@ Registers a Telegram Bot command: `notify`
 Once running you'll be able to interact with the bot sending `/notify fooooooo` message and you'll see `fooooooo` appearing as notification in Bitfinex UI.
 
 ```
-node bi.json notify_telegram
+node bi.js notify_telegram
 ```
