@@ -1,6 +1,6 @@
 # bfx-stuff-ui
 
-### CONFIGURE
+## CONFIGURE
 
 1. Setup the configuration file.
 
@@ -15,7 +15,7 @@ cp config.json.example config.json
 * If you want to run Telegram examples, configure your Telegram bot key `tgKey`.
 
 
-### RUN EXAMPLES
+## RUN EXAMPLES
 
 #### BASIC EXAMPLES
 
@@ -32,9 +32,9 @@ node bi.json chart_marks_basic
 ```
 
 
-#### TWITTER SENTIMENT ANALYSISYS AND CHART MARKERS
+#### TWITTER SENTIMENT ANALISYS AND CHART MARKERS
 
-Subscribes to a list of Twitter influencers, performs basic sentiment analysis and adds the relative markers to Bitfinex UI chart.
+Subscribes to a list of Twitter influencers, performs basic sentiment analysis and adds the relative markers to the Bitfinex UI chart.
 ```
 node bi.json chart_marks_twitter
 ```
@@ -42,7 +42,7 @@ node bi.json chart_marks_twitter
 #### TELEGRAM BOT AND CHART MARKERS 
 
 Registers a Telegram Bot command: `notify`
-Once started you'll be able to run `/notify fooooooo` and you'll see `fooooooo` appearing as notification in Bitfinex UI
+Once running you'll be able to interact with the bot sending `/notify fooooooo` message and you'll see `fooooooo` appearing as notification in Bitfinex UI.
 
 ```
 node bi.json notify_telegram
