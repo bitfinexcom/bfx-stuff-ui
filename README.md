@@ -24,7 +24,7 @@ cp config.json.example config.json
 node bi.json notify_basic
 ```
 
-* Shows a 5 chart markers in your Bitfinex UI chart
+* Adds 5 chart markers in your Bitfinex UI chart
 Note: make sure to use the 5m (or 15m) timeframe and zoom towards current time
 
 ```
@@ -34,11 +34,15 @@ node bi.json chart_marks_basic
 
 #### TWITTER SENTIMENT ANALYSISYS AND CHART MARKERS
 
+Subscribes to a list of Twitter influencers, performs basic sentiment analysis and adds the relative markers to Bitfinex UI chart.
 ```
 node bi.json chart_marks_twitter
 ```
 
 #### TELEGRAM BOT AND CHART MARKERS 
+
+Registers a Telegram Bot command: `notify`
+Once started you'll be able to run `/notify fooooooo` and you'll see `fooooooo` appearing as notification in Bitfinex UI
 
 ```
 node bi.json notify_telegram
