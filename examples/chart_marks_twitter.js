@@ -5,6 +5,7 @@ const Sentiment = require('sentiment')
 const uiLib = require('./../lib-ui.js')
 
 const THRES_RETWEETS = 25
+const THRES_FOLLOWERS = 500
 let USERS = ['paoloardoino', 'bitfinex', 'iamnomad', 'flibbr', 'alistairmilne', 'ZeusZissou', 'adam3us', 'VitalikButerin', 'EOS_io', 'Tether_to', 'ethfinex', 'eosfinexproject', 'aantonop', 'coindesk', 'cointelegraph', 'loomdart']
 
 let MID = 0
@@ -12,6 +13,10 @@ const sentiment = new Sentiment()
 
 function getTweetInfo (tweet, is_stream = false) {
   if (!is_stream && tweet.retweet_count < THRES_RETWEETS) {
+    return
+  }
+
+  if (tweet.user.followers_count < THRES_FOLLOWERS) {
     return
   }
 

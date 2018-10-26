@@ -1,4 +1,4 @@
-const WebSocket = require('ws');
+const WebSocket = require('ws')
 const crypto = require('crypto')
 const fs = require('fs')
 
@@ -37,7 +37,7 @@ const authNonce = (new Date()).getTime() * 1000
 const payload = 'AUTH' + authNonce
 const signature = crypto.createHmac('sha384', w1_apiSecret).update(payload).digest('hex')
 
-wss.on('message', function(data) {
+wss.on('message', function (data) {
   data = JSON.parse(data)
   if (data.event) {
     if (data.event === 'auth' && data.status !== 'OK') {
@@ -45,9 +45,13 @@ wss.on('message', function(data) {
       process.exit(-1)
     }
   }
+
+  setInterval(() => {
+    wss.send(JSON.stringify({ event: 'ping' }))
+  }, 15000)
 })
 
-wss.on('open', function() {
+wss.on('open', function () {
   wss.send(JSON.stringify({
     event: 'auth',
     apiKey: w1_apiKey,
