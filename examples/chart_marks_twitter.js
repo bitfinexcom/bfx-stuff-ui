@@ -1,15 +1,17 @@
+const async = require('async')
 const Twit = require('twit')
 const Sentiment = require('sentiment');
 
 const uiLib = require('./../lib-ui.js')
 
-const THRES_FOLLOWERS = 500
+const THRES_RETWEETS = 25
+let USERS = ['paoloardoino', 'bitfinex', 'iamnomad', 'flibbr', 'alistairmilne', 'ZeusZissou', 'adam3us', 'VitalikButerin', 'EOS_io', 'Tether_to', 'ethfinex', 'eosfinexproject', 'aantonop', 'coindesk', 'cointelegraph']
 
 let MID = 0
 const sentiment = new Sentiment()
 
 function getTweetInfo (tweet, is_stream = false) {
-  if (tweet.user.followers_count < THRES_FOLLOWERS * 10) {
+  if (tweet.retweet_count < THRES_RETWEETS) {
     return
   }
 
@@ -25,7 +27,7 @@ function getTweetInfo (tweet, is_stream = false) {
   return {
     id: 'mark_' + MID++,
     ts: (new Date(tweet.created_at)).getTime(),
-    symbol: 'tBTCUSD',
+    //symbol: 'tBTCUSD',
     content: `<img src="${tweet.user.profile_image_url_https}" /><br />${tweet.text}`,
     color_bg: color_bg,
     color_text: '#FFFFFF',
@@ -35,8 +37,8 @@ function getTweetInfo (tweet, is_stream = false) {
 }
 
 function run (wss, conf, keyword) {
-  if (!keyword) {
-    keyword = 'bitcoin'
+  if (keyword) {
+    USERS = keyword.split(',')
   }
 
   const T = new Twit({
@@ -48,31 +50,39 @@ function run (wss, conf, keyword) {
 
   uiLib.clearMarks(wss)
 
-  T.get(
-    'search/tweets',
-    { q: keyword, result_type: 'popular', locale: 'en', count: 100 },
-    (err, data, response) => {
-      if (!data || !data.statuses) {
-        return
-      }
-
-      data.statuses.forEach(tweet => {
-        const data = getTweetInfo(tweet)
-
+  async.eachSeries(USERS, (inf, next) => {
+    T.get(
+      'statuses/user_timeline',
+      { screen_name: inf, count: 30 },
+      (err, data, response) => {
         if (!data) {
-          return true
+          return next()
         }
 
-        uiLib.addMark(
-          wss, data 
-        )
+        data.forEach(tweet => {
+          const data = getTweetInfo(tweet)
 
-        return true
-      })
+          if (!data) {
+            return true
+          }
+
+          uiLib.addMark(
+            wss, data 
+          )
+
+          return true
+        })
+
+        next()
+      }
+    )
+  }, (err) => {
+    if (err) {
+      console.error('INIT', err)
     }
-  )
+  })
 
-  const stream = T.stream('statuses/filter', { track: [keyword] })
+  const stream = T.stream('statuses/filter', { track: USERS.map(x => `@${x}`) })
 
   stream.on('error', (err) => {
     console.error(err)
@@ -86,6 +96,16 @@ function run (wss, conf, keyword) {
 
     uiLib.addMark(
       wss, getTweetInfo(tweet)
+    )
+
+    uiLib.sendNotification(
+      wss, 
+      tweet.user.profile_image_url_https,
+      `https://twitter.com/${tweet.user.screen_name}/${tweet.id}`,
+      tweet.text,
+      {
+        tone: 'pingUp',
+      } 
     )
   })
 }

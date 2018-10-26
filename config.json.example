@@ -6,5 +6,8 @@
   "twitterKey": "",
   "twitterSecret": "",
   "twitterAccessToken": "",
-  "twitterAccessSecret": ""
+  "twitterAccessSecret": "",
+
+  "_NOTE: Telegram configuration required only for Telegram related examples ;)": null,
+  "tgKey": ""
 }
