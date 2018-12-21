@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "async": "^2.6.1",
+    "request": "^2.88.0",
     "sentiment": "^5.0.1",
     "telegraf": "^3.24.1",
     "twit": "^2.2.11",

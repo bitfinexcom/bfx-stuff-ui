@@ -1,3 +1,20 @@
+function addShape(wss, opts) {
+  opts.type = 'shape_create'
+  wss.send(JSON.stringify(
+    [0, 'n', 12345, {
+      type: 'ucm-ui-chart',
+      info: opts
+    }])
+  )
+}
+
+function clearShapes(wss) {
+  wss.send(JSON.stringify([0, 'n', 12345, { type: 'ucm-ui-chart', info: {
+    type: 'shape_clear',
+  } }])
+  )
+}
+
 function addMark(wss, opts) {
   opts.type = 'marker_create'
   wss.send(JSON.stringify(
@@ -27,7 +44,9 @@ function sendNotification (wss, image, link, message, sound) {
 }
 
 module.exports = {
-  clearMarks: clearMarks,
   sendNotification: sendNotification,
-  addMark: addMark
+  clearMarks: clearMarks,
+  addMark: addMark,
+  addShape: addShape,
+  clearShapes: clearShapes
 }
