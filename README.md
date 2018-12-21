@@ -33,6 +33,13 @@ Note: make sure to use the 5m (or 15m) timeframe and zoom towards current time
 node bi.js chart_marks_basic
 ```
 
+![Basic Shapes](/images/shapes-1.png)
+
+* Add custom shapes to Bitfinex UI chart
+
+```
+node bi.js chart_shapes_basic
+```
 
 #### TWITTER SENTIMENT ANALISYS AND CHART MARKERS
 
@@ -41,7 +48,7 @@ Subscribes to a list of Twitter influencers, performs basic sentiment analysis a
 node bi.js chart_marks_twitter
 ```
 
-![Basic Notification](/images/chart-2.png)
+![Chart Markers](/images/chart-2.png)
 
 
 #### TELEGRAM BOT AND CHART MARKERS 
