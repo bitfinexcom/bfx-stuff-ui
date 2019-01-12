@@ -106,7 +106,7 @@ function run (wss, conf, keyword) {
     uiLib.sendNotification(
       wss,
       tweet.user.profile_image_url_https,
-      `https://twitter.com/${tweet.user.screen_name}/${tweet.id}`,
+      `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`,
       tweet.text,
       {
         tone: 'pingUp'
